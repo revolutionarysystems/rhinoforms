@@ -28,7 +28,7 @@ function Rhinoforms() {
 		// Enable the 'email' validation keyword
 		this.registerValidationKeyword("email", function(value) {
 			if (value) {
-				var regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+				var regex = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (regex.test(value) != true) {
 					return "Invalid email address.";
 				}
