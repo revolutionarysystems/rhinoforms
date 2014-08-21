@@ -1,0 +1,10 @@
+<h3>Error Handling Example</h3>
+<p>Here we can invoke one of 3 submissions to <a href="httpbin.org">httpbin.org</a>.</p>
+<p>The first will return a successful 200 response and therefore we will be redirected to success.html</p>
+<p>The second will return a 500 error and be handled by the default error handling which will just display an alert and end the flow</p>
+<p>The third will also return a 500 error and be handled by the custom error handling and redirect the us to error.html</p>
+<form rhinoforms="true">
+	<input type="submit" rf.action="next" value="Invoke successful submission"/>
+    <input type="submit" rf.action="fail1" value="Invoke failing submission 1"/>
+    <input type="submit" rf.action="fail2" value="Invoke failing submission 2"/>
+</form>		

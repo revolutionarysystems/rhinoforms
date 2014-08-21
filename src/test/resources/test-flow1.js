@@ -3,7 +3,22 @@
 	libraries: ["js/testUtil.js"],
 	formLists: {
 		main: [
-				{ id: "one", url: "one.html", actions: [ "next" ] },
+				{ id: "one", url: "one.html",
+                    actions: [ 
+                        "next",
+                        {
+                            name: "send-bad-submission",
+                            submission: {
+                                url: "http://dummyUrl",
+                                errorHandlers:[
+                                    {
+                                        code: 500,
+                                        target: "error"
+                                    }
+                                ]
+                            }
+                        }
+                    ] },
 				{ id: "two", url: "two.html", actions: [ "back", "add:anotherList.editFish(fishIndex=next)", "edit:anotherList.editFish(fishIndex=?)", "indexTest:indexTestList.indexTestA", "next" ] },
 				{ id: "three", url: "three.html",
 					actions: [
@@ -43,7 +58,8 @@
 							target: "one"
 						}
 					]
-				}
+				},
+                {id: "error", url: "error.html"}
 		],
 		anotherList: [
 			{ id: "editFish", docBase: "fishes/fish[fishIndex]", url: "editFish.html",

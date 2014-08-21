@@ -71,6 +71,11 @@ public class TestConnectionFactory implements ConnectionFactory {
 				return new ByteArrayInputStream(testResponseString.getBytes());
 			}
 
+            @Override
+            public InputStream getErrorStream() {
+                return new ByteArrayInputStream(testResponseString.getBytes());
+            }
+
 			@Override
 			public void setRequestProperty(String key, String value) {
 				recordedRequestProperties.put(key, value);

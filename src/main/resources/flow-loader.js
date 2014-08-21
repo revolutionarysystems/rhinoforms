@@ -138,6 +138,22 @@ function loadFlow(flowMap) {
 						if (typeof thisSubmission.jsonToXmlRootName != 'undefined') {
 							submissionJ.setJsonToXmlRootName(thisSubmission.jsonToXmlRootName);
 						}
+                        if(typeof thisSubmission.errorHandlers != 'undefined'){
+                            for(var i in thisSubmission.errorHandlers){
+                                var errorHandler = thisSubmission.errorHandlers[i];
+                                var errorHandlerJ = new com.rhinoforms.flow.ErrorHandler(errorHandler.target);
+                                if(typeof errorHandler.code != 'undefined'){
+                                    errorHandlerJ.setCodeRegex(errorHandler.code);
+                                }
+                                if(typeof errorHandler.text != 'undefined'){
+                                    errorHandlerJ.setTextRegex(errorHandler.text);
+                                }
+                                if(typeof errorHandler.body != 'undefined'){
+                                    errorHandlerJ.setBodyRegex(errorHandler.body);
+                                }
+                                submissionJ.getErrorHandlers().add(errorHandlerJ);
+                            }
+                        }
 						submissionsListJ.add(submissionJ);
 					}
 					flowActionJ.setSubmissions(submissionsListJ);

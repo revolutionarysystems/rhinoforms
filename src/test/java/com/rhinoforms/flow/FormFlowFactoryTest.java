@@ -39,7 +39,7 @@ public class FormFlowFactoryTest {
 		Map<String, List<Form>> formLists = formFlow.getFormLists();
 		Assert.assertEquals(4, formLists.keySet().size());
 		List<Form> list = formLists.get("main");
-		Assert.assertEquals(3, list.size());
+		Assert.assertEquals(4, list.size());
 		Iterator<Form> iterator = list.iterator();
 		Form nextForm = iterator.next();
 		Assert.assertEquals("one", nextForm.getId());

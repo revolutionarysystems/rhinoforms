@@ -13,6 +13,8 @@ import org.mozilla.javascript.Context;
 
 import com.rhinoforms.ApplicationContext;
 import com.rhinoforms.TestApplicationContext;
+import com.rhinoforms.TestConnectionFactory;
+import com.rhinoforms.net.ConnectionFactory;
 import com.rhinoforms.resourceloader.ResourceLoaderException;
 import com.rhinoforms.xml.DocumentHelper;
 
@@ -169,6 +171,17 @@ public class FormFlowTest {
 		Assert.assertEquals("editFish.html", formFlow.doAction("edit", actionParams, documentHelper));
 		Assert.assertEquals("/myData/fishes/fish[2]", formFlow.getCurrentDocBase());
 		Assert.assertEquals("<myData><fishes><fish><something>existing data</something></fish><fish/></fishes></myData>", documentHelper.documentToString(formFlow.getDataDocument()));
+	}
+    
+    @Test
+	public void testSubmission() throws Exception {
+        RemoteSubmissionHelper remoteSubmissionHelper = new RemoteSubmissionHelper(null, null, null);
+        TestConnectionFactory testConnectionFactory = new TestConnectionFactory();
+        remoteSubmissionHelper.setConnectionFactory(testConnectionFactory);
+        formFlow.setRemoteSubmissionHelper(remoteSubmissionHelper);
+        testConnectionFactory.setResponseCode(500);
+		Assert.assertEquals("one.html", formFlow.navigateToFirstForm(documentHelper));
+		Assert.assertEquals("error.html", formFlow.doAction("send-bad-submission", actionParams, documentHelper));
 	}
 
 }

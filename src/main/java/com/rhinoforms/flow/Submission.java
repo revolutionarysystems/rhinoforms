@@ -2,6 +2,8 @@ package com.rhinoforms.flow;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class Submission implements Serializable {
@@ -18,6 +20,7 @@ public class Submission implements Serializable {
 	private boolean jsonToXml;
 	private boolean jsonToXmlTypeHints;
 	private String jsonToXmlRootName;
+    private List<ErrorHandler> errorHandlers;
 	private static final long serialVersionUID = -6314856649818697445L;
 
 	public Submission(String url) {
@@ -27,6 +30,7 @@ public class Submission implements Serializable {
 		omitXmlDeclaration = false;
 		jsonToXml = true;
 		jsonToXmlTypeHints = true;
+        errorHandlers = new LinkedList<ErrorHandler>();
 	}
 
 	public String getUrl() {
@@ -120,5 +124,13 @@ public class Submission implements Serializable {
 	public void setJsonToXmlRootName(String jsonToXmlRootName) {
 		this.jsonToXmlRootName = jsonToXmlRootName;
 	}
+
+    public List<ErrorHandler> getErrorHandlers() {
+        return errorHandlers;
+    }
+
+    public void setErrorHandlers(List<ErrorHandler> errorHandlers) {
+        this.errorHandlers = errorHandlers;
+    }
 
 }
