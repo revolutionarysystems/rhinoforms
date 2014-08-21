@@ -188,10 +188,18 @@
 	</build>
 
 	<distributionManagement>
-		<repository>
-			<id>rhinoforms.s3.release</id>
-			<url>s3://maven.rhinoforms.com/release</url>
-		</repository>
-	</distributionManagement>
+        <snapshotRepository>
+            <id>revsysSnapshot</id>
+            <name>Revolutionary Systems Snapshots</name>
+            <url>http://build.revsys.co.uk/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>revsysRelease</id>
+            <name>Revolutionary Systems Release</name>
+            <url>http://build.revsys.co.uk/nexus/content/repositories/releases</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
 
 </project>

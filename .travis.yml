@@ -1,2 +1,7 @@
 language: java
-env: build.environment=travis-ci
+before_install: git clone http://github.com/revolutionarysystems/travis.git target/travis
+script: mvn deploy --settings target/travis/settings.xml
+env:
+  secure: NPzQAO8FTgjzheXvlFweYeavDfWOUWs/xQhPR/ZyPlJFab9LT6fVGQ9Uyd0PFbdGmOKD0+w0mvkaS1wO+uruF+6KNFwJPiS9KZQZMo71sl3Z9XH7N6C3ENImUVpOZ1CFmtd5LsS41M7lQqwyasud/VgDORd6tAZfeKWFyb0Voho=
+dd:
+  secure: Wb3chc07Kd2yjXT81Tbe+m8UszzXnCbZR87e5spfI+CNCeYZe+eFohNLOxQgoAfCVhJE2EzNofk5WcfFpjQ/2RlC21PLPSD50vzx/OOPxhSBPBcVhyrEqrwza+ZUrrtSoPAfSf0Q9ZZl3ImqrfSrc/k/Pthz7y8lHWhCAbvzjLE=
