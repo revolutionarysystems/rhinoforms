@@ -275,14 +275,20 @@ public class RemoteSubmissionHelper {
                     inputStream.close();
                 }
             } else {
+                InputStream errorStream = connection.getErrorStream();
+                String responseBody = "";
+                if (errorStream != null) {
+                    responseBody = new String(streamUtils.readStream(errorStream));
+                    errorStream.close();
+                }
+                LOGGER.info("Error response body: " + responseBody);
                 for (ErrorHandler errorHandler : submission.getErrorHandlers()) {
-                    InputStream errorStream = connection.getErrorStream();
-                    String responseBody = "";
-                    if (errorStream != null) {
-                        responseBody = new String(streamUtils.readStream(errorStream));
-                        errorStream.close();
-                    }
+                    LOGGER.info("Error handler body regex: " + errorHandler.getCompiledBodyRegex().pattern());
+                    LOGGER.info("Error handler body regex match: " + errorHandler.getCompiledBodyRegex().matcher(responseBody).matches());
+                    LOGGER.info("Error handler code regex match: " + errorHandler.getCompiledCodeRegex().matcher(String.valueOf(responseCode)).matches());
+                    LOGGER.info("Error handler text regex match: " + errorHandler.getCompiledTextRegex().matcher(connection.getResponseMessage()).matches());
                     if (errorHandler.getCompiledCodeRegex().matcher(String.valueOf(responseCode)).matches() && errorHandler.getCompiledTextRegex().matcher(connection.getResponseMessage()).matches() && errorHandler.getCompiledBodyRegex().matcher(responseBody).matches()) {
+                        LOGGER.info("Using error handler");
                         String target = errorHandler.getTarget();
                         throw new RemoteSubmissionHelperRedirectException("Bad response from target service. Status:" + responseCode + ", message:"
                                 + connection.getResponseMessage(), target);

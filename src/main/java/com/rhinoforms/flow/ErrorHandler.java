@@ -48,7 +48,7 @@ public class ErrorHandler implements Serializable{
 
     public void setBodyRegex(String bodyRegex) {
         this.bodyRegex = bodyRegex;
-        compiledBodyRegex = Pattern.compile(bodyRegex);
+        compiledBodyRegex = Pattern.compile(bodyRegex, Pattern.DOTALL | Pattern.MULTILINE);
     }
 
     public Pattern getCompiledTextRegex() {

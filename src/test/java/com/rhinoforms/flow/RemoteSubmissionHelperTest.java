@@ -397,9 +397,10 @@ public class RemoteSubmissionHelperTest {
         submission.getData().put("xml", "[dataDocument]");
         submission.setResultInsertPoint("/myData");
         ErrorHandler errorHandler = new ErrorHandler("error");
-        errorHandler.setCodeRegex("500");
+        //errorHandler.setCodeRegex("500");
+        errorHandler.setBodyRegex("Unable to Send Email.*");
         submission.getErrorHandlers().add(errorHandler);
-        testConnectionFactory.setResponseString("<submissionResult>one</submissionResult>");
+        testConnectionFactory.setResponseString("Unable to Send Email: 554 Message rejected: Email address is not verified.\n");
         testConnectionFactory.setResponseCode(500);
         testConnectionFactory.setResponseMessage("Something went very wrong.");
 
